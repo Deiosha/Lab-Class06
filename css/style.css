@@ -10,20 +10,16 @@ h1 {
 h2 {
   font-family: Arial;
   color: brown;
-  text-align:center
+  text-align:center;
+  padding: 10px;
 }
 
 h3 {
   text-align: center;
 }
 
-button {
-  text-align: center;
-}
-button:hover {
-  background-color: cadetblue;
-  text-align: center;
-
+h4 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 p { 
@@ -32,10 +28,14 @@ color: rgb(100, 39, 39);
 text-align: center;
 }
 
-ol {
+li {
   font-family: Arial, Helvetica, sans-serif;
-  color: black;
-  outline: 1px solid ;
+  color: brown;
   background-color: darkgray;
+  margin: 10px;
+  border: 30px;
 }
 
+button:hover {
+
+}
