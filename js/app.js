@@ -8,6 +8,7 @@ let myForm = document.getElementById('my-form');
 
 function handleSubmit(event) {
   // DEFINE WHAT THE FUNCTION DOES
+  console.log(event);
   event.preventDefault();
 
   let name = event.target.locationCity.value;
@@ -16,18 +17,21 @@ function handleSubmit(event) {
   let selection = event.target.favoriteCookies.value;
   console.log(selection);
 
-  let photo = event.target.photo.value;
-  console.log('photo');
+  // let photo = event.target.photo.value;
+  // console.log('photo');
 
   // Gather temperment info from our form
-  let LocationMin = event.target.min.checked;
-  let locationMax = event.taget.max.checked;
-  let locationAvg = event.tagert.average.checked;
-  myForm.reset();
+  let min = event.target.min.checked;
+  let max = event.taget.max.checked;
+  let average = event.tagert.average.checked;
 
+  // Adding new shop information:
+  // let seattle = new Shop('Seattle', 23, 65, 6.3);
+  new Shop(name, min, max, average);
+  myForm.reset();
 }
 
-// STEP 2: ADD EVENT LISTENER 
+// STEP 2: ADD EVENT LISTENER
 
 myForm.addEventListener('submit', handleSubmit);
 
