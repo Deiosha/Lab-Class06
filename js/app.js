@@ -11,31 +11,26 @@ function handleSubmit(event) {
   console.log(event);
   event.preventDefault();
 
-  let name = event.target.locationCity.value;
+  let name = event.target.locationName.value;
   console.log(name);
 
-  let selection = event.target.favoriteCookies.value;
-  console.log(selection);
-
-  // let photo = event.target.photo.value;
-  // console.log('photo');
 
   // Gather temperment info from our form
-  let min = event.target.min.checked;
-  let max = event.taget.max.checked;
-  let average = event.tagert.average.checked;
+  let min = event.target.locationMin.value;
+  let max = event.target.locationMax.value;
+  let average = event.target.locationAvg.value;
+
+  console.log(name, min, max, average);
 
   // Adding new shop information:
   // let seattle = new Shop('Seattle', 23, 65, 6.3);
-  new Shop(name, min, max, average);
+  let newShop = new Shop(name, min, max, average);
+  newShop.getCookieNum();
+  newShop.render();
+  console.log('newShop', newShop);
+  makeFooter();
   myForm.reset();
 }
-
-// STEP 2: ADD EVENT LISTENER
-
-myForm.addEventListener('submit', handleSubmit);
-
-
 
 
 let shopHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
@@ -48,29 +43,28 @@ let tableElem = document.getElementById('table');
 // from MDN
 function randomCustomer(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function makeHeader() {
+  let tableRow = document.createElement('tr');
+  // <tr></tr> skip 3 because no need for text
+  tableElem.appendChild(tableRow);
+  // <table><tr></tr></table>
 
-  function makeHeader() {
-    let tableRow = document.createElement('tr');
-    // <tr></tr> skip 3 because no need for text
-    tableElem.appendChild(tableRow);
-    // <table><tr></tr></table>
+  let firstCell = document.createElement('td');
+  // <td></td>
+  firstCell.textContent = 'Locations';
+  tableRow.appendChild(firstCell);
+  // <table> <tr> <td></td> </tr> </table>
 
-    let firstCell = document.createElement('td');
-    // <td></td>
-    firstCell.textContent = 'Locations';
-    tableRow.appendChild(firstCell);
-    // <table> <tr> <td></td> </tr> </table>
-
-    for (let i = 0; i < shopHours.length; i++) {
-      let tableData = document.createElement('td');
-      // nothing in here. not in our html
-      // next we give it content
-      tableData.textContent = shopHours[i];
-      // the first loop will be 6am and so on...
-      tableRow.appendChild(tableData);
-    }
-
+  for (let i = 0; i < shopHours.length; i++) {
+    let tableData = document.createElement('td');
+    // nothing in here. not in our html
+    // next we give it content
+    tableData.textContent = shopHours[i];
+    // the first loop will be 6am and so on...
+    tableRow.appendChild(tableData);
   }
+
 }
 
 // CONSTRUCTOR FUNCTION
@@ -109,7 +103,7 @@ Shop.prototype.render = function () {
   city.textContent = this.locationName;
   tableRow.appendChild(city);
 
-  for (let i = 0; i < this.cookiesPerHour.length; i++) {
+  for (let i = 0; i < shopHours.length; i++) {
     let tableData = document.createElement('td');
     tableData.textContent = this.cookiesPerHour[i];
     tableRow.appendChild(tableData);
@@ -127,17 +121,17 @@ let lima = new Shop('Lima', 2, 16, 4.6);
 
 console.log(allShops);
 
-function makeHeader() {
-  let tableRow = document.createElement('tr');
-  tableElem.appendChild(tableRow);
-  let firstCell = document.createElement('td');
-  tableRow.appendChild(firstCell);
-  for (let i = 0; i < shopHours.length; i++) {
-    let tableData = document.createElement('td');
-    tableData.textContent = shopHours[i];
-    tableRow.appendChild(tableData);
-  }
-}
+// function makeHeader() {
+//   let tableRow = document.createElement('tr');
+//   tableElem.appendChild(tableRow);
+//   let firstCell = document.createElement('td');
+//   tableRow.appendChild(firstCell);
+//   for (let i = 0; i < shopHours.length; i++) {
+//     let tableData = document.createElement('td');
+//     tableData.textContent = shopHours[i];
+//     tableRow.appendChild(tableData);
+//   }
+// }
 
 
 function makeFooter() {
@@ -187,5 +181,6 @@ paris.render();
 
 lima.getCookieNum();
 lima.render();
-
+myForm.addEventListener('submit', handleSubmit);
 makeFooter();
+
